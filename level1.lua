@@ -43,3 +43,15 @@ function scene:create( event )
 	sceneGroup:insert( grass)
 	sceneGroup:insert( crate )
 end
+
+function scene:show( event )
+	local sceneGroup = self.view
+	local phase = event.phase
+	
+	if phase == "will" then
+
+	elseif phase == "did" then
+
+		physics.start()
+	end
+end
