@@ -34,3 +34,12 @@ bom = false
 
 --スコア
 local score=0
+-- スコアの初期設定をする
+function setScore()
+   --scoreで与えられた得点と表示させる
+     tfScoreDisplay = display.newText("score:"..score,display.contentWidth *0.75 , display.contentHeight*0.05,native.systemFont,30)
+       tfScoreDisplay.align = "right"
+         
+	   return  tfScoreDisplay
+	   end
+
