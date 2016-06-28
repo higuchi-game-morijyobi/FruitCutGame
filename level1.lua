@@ -91,6 +91,40 @@ timerLabel:setTextColor(255, 0, 0)
 	--1秒ごとにtimeCheck関数を呼び出す　呼び出し間隔、呼び出すfunction名、繰返し回数:time_limit
 	GameTimer1 = timer.performWithDelay (1000,timeCheck,time_limit)
 
+ -- 1秒ごとに実行される関数　　
+  function update(event)
+    print(os.clock())
+    
+    --ランダムなx位置に出現
+    local fruit = fruits.newFruit()
+    
+    print(fruits.bom)
+    
+      if (fruits.bom == true) then
+        local x = 0
+        print("ゆれてー")
+              
+        local function listener1( obj )
+           transition.to(background,{time=100,x = -30})
+           transition.to(background,{time=100,x = 0})
+          end
+          local function listener2( obj )
+            transition.to(background,{time=100,x = 0})
+            end
+          
+          transition.to(background,{time=100,x = 30,onComplete=listener1  })
+          
+          x = x + 1
+          print("ゆれろー")
+        
+        fruits.bom = false
+        print(bom)
+      end
+        
+    end
+  tm = timer.performWithDelay(1500,update,0) 
+
+
 function scene:show( event )
 	local sceneGroup = self.view
 	local phase = event.phase
@@ -102,4 +136,5 @@ function scene:show( event )
 		physics.start()
 	end
 end
+
 
