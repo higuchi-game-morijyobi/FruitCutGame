@@ -26,3 +26,28 @@ local resultText=display.newText("りざると！",halfW, screenH*0.1,nil,48)
 local ScoreText=display.newText("score:"..fruits.textscore(),halfW, screenH*0.3,nil,48)
       ScoreText:setTextColor(255, 0, 0)
 
+
+
+function scene:create( event )
+
+	local sceneGroup = self.view
+  
+--背景を設置する関数
+function set_background()
+  
+  
+  background = display.newImageRect( "images/manaita_tate.png", screenW, screenH )
+	background.anchorX = 0
+	background.anchorY = 0
+	background.x = 0
+  background.y = 0
+  
+  
+end
+  title_button:addEventListener("touch",title_button_push)
+  
+  
+  set_background()
+	sceneGroup:insert( background )
+end
+
