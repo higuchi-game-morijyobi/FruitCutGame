@@ -28,3 +28,18 @@ function scene:create( event )
 	
 
 	physics.addBody( crate, { density=1.0, friction=0.3, bounce=0.3 } )
+
+	local grass = display.newImageRect( "grass.png", screenW, 82 )
+	grass.anchorX = 0
+	grass.anchorY = 1
+	grass.x, grass.y = 0, display.contentHeight
+	
+	
+	local grassShape = { -halfW,-34, halfW,-34, halfW,34, -halfW,34 }
+	physics.addBody( grass, "static", { friction=0.3, shape=grassShape } )
+	
+
+	sceneGroup:insert( background )
+	sceneGroup:insert( grass)
+	sceneGroup:insert( crate )
+end
