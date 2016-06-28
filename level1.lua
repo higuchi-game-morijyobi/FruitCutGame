@@ -66,6 +66,31 @@ function setwall()
 	sceneGroup:insert( grass)
 	end
 
+	local timerIcon = display.newImage("images/clock.png",display.contentWidth * 0.1, display.contentHeight * 0.1)
+ 
+	local CountDownTimer = 30
+ 
+	local  time_limit = CountDownTimer
+ 
+	local timerLabel = display.newText(CountDownTimer,display.contentWidth*0.25 ,display.contentHeight*0.1 ,nil,36)
+timerLabel:setTextColor(255, 0, 0)
+ 
+	--　残り時間を減らす関数
+	local function timeCheck()
+   
+   	CountDownTimer = CountDownTimer-1
+  		if CountDownTimer>=10 then
+    			timerLabel.text = CountDownTimer
+  		elseif (CountDownTimer>0) then
+     			timerLabel.text = "0" .. CountDownTimer
+  		elseif (CountDownTimer==0) then
+    			timerLabel.text = "0" .. CountDownTimer
+  		end  
+	end
+
+	--1秒ごとにtimeCheck関数を呼び出す　呼び出し間隔、呼び出すfunction名、繰返し回数:time_limit
+	GameTimer1 = timer.performWithDelay (1000,timeCheck,time_limit)
+
 function scene:show( event )
 	local sceneGroup = self.view
 	local phase = event.phase
@@ -77,3 +102,4 @@ function scene:show( event )
 		physics.start()
 	end
 end
+
