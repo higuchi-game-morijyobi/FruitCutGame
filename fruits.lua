@@ -43,3 +43,20 @@ function setScore()
 	   return  tfScoreDisplay
 	   end
 
+-- スコアを加算しスコア・コンボを表示する
+function addScore(point)
+  
+       score = score + point + (combo * 10)
+          tfScoreDisplay.text = "score:"..score
+	     --◆◆◆６．コンボによるスコア変化
+	        if combo == 1 then
+		     comboDisplay = display.newText((combo+1).."コンボ",
+		           display.contentWidth * 0.8, display.contentHeight * 0.15, native.systemFont, 30)
+			        comboFlg = true
+				    elseif combo > 1 then
+				          comboDisplay.text = (combo+1).."コンボ"
+					      end
+					       
+					        return score
+						end
+
