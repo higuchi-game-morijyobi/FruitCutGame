@@ -74,3 +74,13 @@ function scene:hide( event )
 				    
  	end	
 end
+
+function scene:destroy( event )
+	local sceneGroup = self.view
+		
+	if playBtn then
+	playBtn:removeSelf()
+	playBtn = nil
+	end
+end
+
