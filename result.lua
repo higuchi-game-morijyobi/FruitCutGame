@@ -50,4 +50,14 @@ end
   set_background()
 	sceneGroup:insert( background )
 end
-
+--タイトル戻るを押したなら
+function title_button_push(event)
+    
+     media.playEventSound(SE_SELECT)
+     media.stopSound()
+     
+     composer.gotoScene( "menu","fade", 500 )
+     resultText.isVisible=false
+     title_button.isVisible=false
+     ScoreText.isVisible =false
+end
