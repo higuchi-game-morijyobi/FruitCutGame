@@ -78,6 +78,102 @@ local function removeFruit(event)
         
 end
 
+-- 果物をタッチした時の動作
+function onFruit(event)
+  -- タッチし終えたとき
+  if("ended" == event.phase) then
+      -- タッチしたスプライトを取得する
+          local fruit = event.target 
+	      
+	          
+		      --◆◆◆２．爆弾をタッチ時の動作
+		          if fruit ~= nil and fruit.type == 16 then
+			        
+				        score = math.floor(score / 2)
+					        tfScoreDisplay.text = score
+						        bom = true
+							        
+								        exeffect = display.newImageRect(IMAGE_DIR.."Explosion.png",64,64)
+									        exeffect.x = fruit.x
+										        exeffect.y = fruit.y
+											        transition.to(exeffect,{time=500,xScale=3,yScale=3})
+												        transition.to(exeffect,{time = 500,alpha=0,delay=500})
+													        
+														        --爆発SE
+															        if(math.random(1,2)==1)then
+																          audio.play(SE_Ex1)
+																	          else
+																		            audio.play(SE_Ex2)
+																			            end
+																				            
+																					            print("MISS")
+																						        end
+																							     
+																							         transition.to(fruit.L,{time = 500,rotation=-25,alpha=0.8 ,x=-100})
+																								     transition.to(fruit.R,{time = 500,rotation= 25,alpha=0.8 ,x=100})
+																								         
+																									     --斬るエフェクト
+																									         effect = display.newImageRect(IMAGE_DIR.."effectCut.png",64,64)
+																										     
+																										         effect.x = fruit.x
+																											     effect.y = fruit.y
+																											       
+																											           effect.rotation = math.random(60)-30
+																												       
+																												           transition.to(effect,{time=500,xScale=3,yScale=3})
+																													       
+																													           transition.to(effect,{time = 500,alpha=0,delay=500})
+																														       --爆発音
+																														           if(math.random(1,2)==1)then
+																															         audio.play(SE_Cut1)
+																																     else
+																																           audio.play(SE_Cut2)
+																																	       end
+																																	           
+																																		       --◆◆◆４．フルーツごとに点数を変更
+																																		           if fruit ~= nil and (fruit.type == 1 or fruit.type == 5 or fruit.type == 9 
+																																			           or fruit.type == 11 or fruit.type == 12 or fruit.type == 14) then
+																																				         addScore(5)
+																																					       combo = combo + 1
+																																					           elseif fruit ~= nil and (fruit.type == 3 or fruit.type == 4 or fruit.type == 7
+																																						           or fruit.type == 10 or fruit.type == 13) then
+																																							         addScore(10)
+																																								       combo = combo + 1
+																																								           elseif fruit ~= nil and (fruit.type == 2 or fruit.type == 6 or fruit.type == 8
+																																									           or fruit.type == 15) then
+																																										         addScore(15)
+																																											       combo = combo + 1
+																																											           elseif fruit ~= nil and fruit.type == 16 then
+																																												          -- コンボ数初期化&爆弾タッチ時処理
+																																													        combo = 0
+																																														      score = math.floor(score/2)
+																																														            tfScoreDisplay.text = "score:"..score
+																																															          if comboFlg == true then
+																																																          comboDisplay.text = false
+																																																	        end
+																																																		      
+																																																		            print("bom")
+																																																			        end
+																																																				     
+																																																				         print("コンボ数" ..combo)
+																																																					     
+																																																					         --イベントに反応しないようにする
+																																																						     fruit:removeEventListener("touch",onFruit)
+																																																						        
+																																																							   --大体の処理が終わった頃(2000ms後)、消去
+																																																							      local tm = timer.performWithDelay(1000,removeFruit)
+																																																							         tm.params = {fruit = event.target}
+																																																								    
+																																																								       
+																																																								         end  
+																																																									 end
+
+																																																									 --剛体グループの設定　果物はグループ番号2,果物が干渉する剛体は1と4
+																																																									 physicsGroupFruit = {categoryBits=2,maskBits=5}
+
+																																																									 -- 座標(x,y)に果物を生成する関数
+																																																									 -- ◆◆◆５．いろんな方向から果物飛ばす
+
 function newFruit()
  fruit = display.newGroup()
   
