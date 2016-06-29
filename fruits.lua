@@ -77,3 +77,67 @@ local function removeFruit(event)
        fruit = nil
         
 end
+
+function newFruit()
+ fruit = display.newGroup()
+  
+   --出現位置設定
+       fruit.x = display.contentWidth * 0.1 + display.contentWidth * 0.05 * math.random(0, 5)
+           fruit.y = display.contentHeight
+	    fruit02 = display.newGroup()
+	        fruit02.x = display.contentWidth * 0.7 + display.contentWidth * 0.05 * math.random(0, 5)
+		    fruit02.y = display.contentHeight
+		     
+		      local type = math.random(1,16)
+		       --果物の種類
+		        fruit.type = type
+			 fruit02.type = type
+			  
+			   local left = IMAGE_DIR..string.format("fruit%d.png",type*2-1)
+			    local right = IMAGE_DIR..string.format("fruit%d.png",type*2)
+			     
+			      fruit.L = display.newImageRect(fruit,left,32,64)
+			       fruit.R = display.newImageRect(fruit,right,32,64)
+			        
+				 fruit.L.anchorX,fruit.L.anchorY = 1,0.5
+				  fruit.R.anchorX,fruit.R.anchorY = 0,0.5
+				   
+				    fruit.L.x,fruit.L.y = x, y
+				     fruit.R.x,fruit.R.y = x, y
+				      
+				       fruit02.L = display.newImageRect(fruit02,left,32,64)
+				       fruit02.R = display.newImageRect(fruit02,right,32,64)
+
+				       fruit02.L.anchorX,fruit02.L.anchorY = 1, 0.5
+				       fruit02.R.anchorX,fruit02.R.anchorY = 0, 0.5
+
+				       fruit02.L.x, fruit02.L.y = x, y
+				       fruit02.R.x, fruit02.R.y = x, y
+				        
+					 physics.addBody(fruit,{radius=10,filter=physicsGroupFruit} )
+					  
+					   --ベクトル速度
+					    fruit:setLinearVelocity(math.random(30,50),-1*math.random(450,500))
+					     
+					      --フルーツをタッチしたらonFruitを呼ぶ
+					       fruit:addEventListener("touch",onFruit)
+					        
+						 --myGroupにmyImageを挿入
+						  myGroup:insert(fruit)
+						   
+						      --円の剛体をボールに
+						        physics.addBody(fruit02,{radius = 10, filter = physicsGroupFruit})
+							  --ベクトル速度
+							    fruit02:setLinearVelocity( math.random(-50, -30),-1 * math.random(450, 500))
+
+							      --果物タッチで呼び出し
+							        fruit02:addEventListener("touch", onFruit)
+								  
+								    --myGroupにmyImageを挿入
+								      myGroup:insert(fruit02)
+								       
+								        print(myGroup.numChildren)
+									 
+									 return fruit
+
+									 end
