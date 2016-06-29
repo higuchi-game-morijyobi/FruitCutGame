@@ -64,3 +64,16 @@ function textscore()
   return score
 end
 
+local function removeFruit(event)
+  
+  local params = event.source.params
+  local fruit = params.fruit
+     
+       -- 移動などのアニメーションを停止する
+       transition.cancel(fruit.L)
+       transition.cancel(fruit.R)
+       -- 自分自身を削除する
+       display.remove(fruit)
+       fruit = nil
+        
+end
