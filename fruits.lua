@@ -141,3 +141,22 @@ function newFruit()
 									 return fruit
 
 									 end
+
+function update(event)
+  
+    for i=1,myGroup.numChildren do
+        local child = myGroup[i]
+	    if child~=nul and (child.x > display.contentWidth or child.y >display.contentHeight) then
+	          transition.cancel(child.L)
+		        transition.cancel(child.R)
+			      
+			            --自分を削除
+				          display.remove(child)
+					        child=nil
+						      print("remove?"..i.."")
+						           end
+							     end
+							     end
+							     --
+
+
