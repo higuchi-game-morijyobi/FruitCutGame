@@ -153,3 +153,28 @@ function scene:hide( event )
 	end	
 	
 end
+
+
+function scene:destroy( event )
+
+	-- Called prior to the removal of scene's "view" (sceneGroup)
+	-- 
+	-- INSERT code here to cleanup the scene
+	-- e.g. remove display objects, remove touch listeners, save state, etc.
+	local sceneGroup = self.view
+	
+	package.loaded[physics] = nil
+	physics = nil
+end
+
+---------------------------------------------------------------------------------
+
+-- Listener setup
+scene:addEventListener( "create", scene )
+scene:addEventListener( "show", scene )
+scene:addEventListener( "hide", scene )
+scene:addEventListener( "destroy", scene )
+
+-----------------------------------------------------------------------------------------
+
+return scene
