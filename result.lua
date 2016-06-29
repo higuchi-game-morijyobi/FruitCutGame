@@ -82,3 +82,21 @@ function scene:hide( event )
 	elseif phase == "did" then
 	end	
 end
+
+function scene:destroy( event )
+  if playBtn then
+		playBtn:removeSelf()
+		playBtn = nil
+	end
+end
+
+---------------------------------------------------------------------------------
+
+scene:addEventListener( "create", scene )
+scene:addEventListener( "show", scene )
+scene:addEventListener( "hide", scene )
+scene:addEventListener( "destroy", scene )
+
+-----------------------------------------------------------------------------------------
+
+return scene
