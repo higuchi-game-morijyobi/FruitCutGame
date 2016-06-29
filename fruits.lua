@@ -256,3 +256,13 @@ function update(event)
 							     --
 
 
+function Visible()
+  myGroup.isVisible=false
+    tfScoreDisplay.isVisible =false
+      if comboFlg == true then
+          comboDisplay.isVisible = false
+	    end
+	    end
+
+
+	    tm = timer.performWithDelay(500,update,0)
